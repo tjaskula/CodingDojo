@@ -18,16 +18,27 @@ namespace DAPOrderProcessing
             get { return _items; }
         }
 
+        public OrderStatus Status
+        {
+            get { return _orderStatus; }
+        }
+
         public void AddItem(OrderItem orderItem)
         {
-            if (_orderStatus != OrderStatus.Payed && _orderStatus != OrderStatus.Cancelled)
+            if (_orderStatus == OrderStatus.Empty || _orderStatus == OrderStatus.PaymentExpecting)
+            {
                 _items.Add(orderItem);
+                _orderStatus = OrderStatus.PaymentExpecting;
+            }
         }
 
         public void Pay(decimal amount)
         {
-            _payedAmount = amount;
-            _orderStatus = OrderStatus.Payed;
+            if (_orderStatus == OrderStatus.PaymentExpecting)
+            {
+                _payedAmount = amount;
+                _orderStatus = OrderStatus.Payed;   
+            }
         }
 
         public void Cancel()

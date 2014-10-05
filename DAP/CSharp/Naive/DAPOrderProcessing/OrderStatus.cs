@@ -1,8 +1,9 @@
 ﻿namespace DAPOrderProcessing
 {
-    internal enum OrderStatus
+    public enum OrderStatus
     {
         Empty,
+        PaymentExpecting,
         Payed,
         Cancelled
     }
