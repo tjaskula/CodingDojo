@@ -42,10 +42,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OrderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Naive\DAPOrderProcessing\DAPOrderProcessing.csproj">
+      <Project>{e2592649-3caa-4d68-a6ab-c4432c242dbf}</Project>
+      <Name>DAPOrderProcessing</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
