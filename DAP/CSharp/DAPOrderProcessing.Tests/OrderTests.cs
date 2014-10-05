@@ -102,5 +102,35 @@ namespace DAPOrderProcessing.Tests
             Assert.Equal(1, order.Items.Count());
             Assert.Equal(OrderStatus.Cancelled, order.Status);
         }
+
+        // You can only cancel an unpayed order
+        [Fact]
+        public void ShouldNotCancelWhenOrderIsPayed()
+        {
+            var order = new Order();
+            order.AddItem(new OrderItem());
+            order.Pay(1000);
+            order.Cancel();
+            Assert.Equal(OrderStatus.Payed, order.Status);
+        }
+
+        // You can only cancel an unpayed order
+        [Fact]
+        public void ShouldCancelWhenOrderIsNotPayed()
+        {
+            var order = new Order();
+            order.AddItem(new OrderItem());
+            order.Cancel();
+            Assert.Equal(OrderStatus.Cancelled, order.Status);
+        }
+
+        // You can only cancel an unpayed order
+        [Fact]
+        public void ShouldCancelWhenOrderIsEmpty()
+        {
+            var order = new Order();
+            order.Cancel();
+            Assert.Equal(OrderStatus.Cancelled, order.Status);
+        }
     }
 }

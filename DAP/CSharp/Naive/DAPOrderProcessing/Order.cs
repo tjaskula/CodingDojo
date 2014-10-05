@@ -48,7 +48,8 @@ namespace DAPOrderProcessing
 
         public void Cancel()
         {
-            _orderStatus = OrderStatus.Cancelled;
+            if (_orderStatus == OrderStatus.Empty || _orderStatus == OrderStatus.PaymentExpecting)
+                _orderStatus = OrderStatus.Cancelled;
         }
 
         public void RemoveItem(OrderItem orderItem)
