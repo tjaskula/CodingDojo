@@ -50,5 +50,14 @@ namespace DAPOrderProcessing
         {
             _orderStatus = OrderStatus.Cancelled;
         }
+
+        public void RemoveItem(OrderItem orderItem)
+        {
+            if (_orderStatus == OrderStatus.PaymentExpecting)
+            {
+                _items.Remove(orderItem);
+                _orderStatus = _items.Count == 0 ? OrderStatus.Empty : _orderStatus;
+            }
+        }
     }
 }

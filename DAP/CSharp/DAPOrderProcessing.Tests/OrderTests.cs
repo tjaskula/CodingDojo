@@ -67,5 +67,14 @@ namespace DAPOrderProcessing.Tests
             Assert.Equal(1, order.Items.Count());
             Assert.Equal(1000, order.PayedAmount);
         }
+
+        // You cannot remove items from an empty order
+        [Fact]
+        public void ShouldNotRemoveItemsWhenOrderIsEmpty()
+        {
+            var order = new Order();
+            order.RemoveItem(new OrderItem());
+            Assert.Equal(0, order.Items.Count());
+        }
     }
 }
