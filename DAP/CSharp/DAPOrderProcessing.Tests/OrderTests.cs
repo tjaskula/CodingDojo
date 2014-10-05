@@ -68,6 +68,18 @@ namespace DAPOrderProcessing.Tests
             Assert.Equal(1000, order.PayedAmount);
         }
 
+        // You cannot pay for a cancelled order
+        [Fact]
+        public void ShouldNotAcceptPaymentWhenOrderIsCancelled()
+        {
+            var order = new Order();
+            order.AddItem(new OrderItem());
+            order.Cancel();
+            order.Pay(1000);
+            Assert.Equal(OrderStatus.Cancelled, order.Status);
+            Assert.Equal(0, order.PayedAmount);
+        }
+
         // You cannot remove items from an empty order
         [Fact]
         public void ShouldNotRemoveItemsWhenOrderIsEmpty()
