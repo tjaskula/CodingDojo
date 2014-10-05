@@ -17,6 +17,7 @@ This repository contains some coding dojos and exercices I've been runing in dif
  ---------------------------------------------------------
 
 This example is inspired from a domain being discussed and implemented in ["REST in practice book"](http://shop.oreilly.com/product/9780596805838.do)
+Implementation inspired by Scott Wlaschin [blog](http://fsharpforfunandprofit.com/posts/designing-for-correctness/) 
 
    **C# version**
 
@@ -57,7 +58,7 @@ This example is inspired from a domain being discussed and implemented in ["REST
       * You can cancel an Order if it's not already Payed or Completed and transitions to Cancelled state
       * When an order is Received it transitions to Completed state
 
-   Business rules according to states are as follows
+   Business rules according to states are as follows :
 
    	  * You can Add order items only to Empty or PaymentExpected state
    	  * You can Remove order items only from PaymentExpected state
