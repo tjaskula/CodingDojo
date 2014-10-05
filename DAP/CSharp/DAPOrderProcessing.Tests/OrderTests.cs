@@ -9,7 +9,7 @@ namespace DAPOrderProcessing.Tests
         [Fact]
         public void ShouldAddItemWhenOrderIsNotPayed()
         {
-            var order = new Order();
+            var order = new Order("123");
             order.AddItem(new OrderItem());
             Assert.Equal(1, order.Items.Count());
         }
@@ -18,7 +18,7 @@ namespace DAPOrderProcessing.Tests
         [Fact]
         public void ShouldNotAddItemWhenOrderIsPayed()
         {
-            var order = new Order();
+            var order = new Order("123");
             order.AddItem(new OrderItem());
             order.Pay(1000);
             order.AddItem(new OrderItem());
@@ -29,7 +29,7 @@ namespace DAPOrderProcessing.Tests
         [Fact]
         public void ShouldNotAddItemWhenOrderIsCancelled()
         {
-            var order = new Order();
+            var order = new Order("123");
             order.Cancel();
             order.AddItem(new OrderItem());
             Assert.Equal(0, order.Items.Count());
@@ -39,7 +39,7 @@ namespace DAPOrderProcessing.Tests
         [Fact]
         public void ShouldOrderBePayableWithAtLeastOneItem()
         {
-            var order = new Order();
+            var order = new Order("123");
             order.AddItem(new OrderItem());
             order.Pay(1000);
             Assert.Equal(OrderStatus.Payed, order.Status);
@@ -50,7 +50,7 @@ namespace DAPOrderProcessing.Tests
         [Fact]
         public void ShouldOrderStatusBeExpectedPendingWhenOrderIsEmpty()
         {
-            var order = new Order();
+            var order = new Order("123");
             order.Pay(1000);
             Assert.Equal(OrderStatus.Empty, order.Status);
         }
@@ -59,7 +59,7 @@ namespace DAPOrderProcessing.Tests
         [Fact]
         public void ShouldPaymentSucceedWhenOrderIsNotAlreadyPayed()
         {
-            var order = new Order();
+            var order = new Order("123");
             order.AddItem(new OrderItem());
             order.Pay(1000);
             order.AddItem(new OrderItem());
@@ -72,7 +72,7 @@ namespace DAPOrderProcessing.Tests
         [Fact]
         public void ShouldNotAcceptPaymentWhenOrderIsCancelled()
         {
-            var order = new Order();
+            var order = new Order("123");
             order.AddItem(new OrderItem());
             order.Cancel();
             order.Pay(1000);
@@ -84,7 +84,7 @@ namespace DAPOrderProcessing.Tests
         [Fact]
         public void ShouldNotRemoveItemsWhenOrderIsEmpty()
         {
-            var order = new Order();
+            var order = new Order("123");
             order.RemoveItem(new OrderItem());
             Assert.Equal(0, order.Items.Count());
         }
@@ -93,7 +93,7 @@ namespace DAPOrderProcessing.Tests
         [Fact]
         public void ShouldNotRemoveItemsWhenOrderIsPayed()
         {
-            var order = new Order();
+            var order = new Order("123");
             var orderItem = new OrderItem();
             order.AddItem(orderItem);
             order.Pay(1000);
@@ -106,7 +106,7 @@ namespace DAPOrderProcessing.Tests
         [Fact]
         public void ShouldNotRemoveItemsWhenOrderIsCancelled()
         {
-            var order = new Order();
+            var order = new Order("123");
             var orderItem = new OrderItem();
             order.AddItem(orderItem);
             order.Cancel();
@@ -119,7 +119,7 @@ namespace DAPOrderProcessing.Tests
         [Fact]
         public void ShouldNotCancelWhenOrderIsPayed()
         {
-            var order = new Order();
+            var order = new Order("123");
             order.AddItem(new OrderItem());
             order.Pay(1000);
             order.Cancel();
@@ -130,7 +130,7 @@ namespace DAPOrderProcessing.Tests
         [Fact]
         public void ShouldCancelWhenOrderIsNotPayed()
         {
-            var order = new Order();
+            var order = new Order("123");
             order.AddItem(new OrderItem());
             order.Cancel();
             Assert.Equal(OrderStatus.Cancelled, order.Status);
@@ -140,9 +140,57 @@ namespace DAPOrderProcessing.Tests
         [Fact]
         public void ShouldCancelWhenOrderIsEmpty()
         {
-            var order = new Order();
+            var order = new Order("123");
             order.Cancel();
             Assert.Equal(OrderStatus.Cancelled, order.Status);
+        }
+
+        // Only payed order can be completed
+        [Fact]
+        public void ShouldCompleteOrderWhenOrderIsPayed()
+        {
+            var order = new Order("123");
+            order.AddItem(new OrderItem());
+            order.Pay(1000);
+            var receipt = order.GetPaymentReceipt();
+            order.Receive(receipt);
+            Assert.Equal(OrderStatus.Completed, order.Status);
+        }
+
+        // Only payed order can be completed
+        [Fact]
+        public void ShouldNotCompleteOrderWhenReceiptIsWrong()
+        {
+            var order = new Order("123");
+            var order2 = new Order("ABC");
+            order.AddItem(new OrderItem());
+            order2.AddItem(new OrderItem());
+            order.Pay(1000);
+            order2.Pay(5000);
+            var receipt = order2.GetPaymentReceipt();
+            order.Receive(receipt);
+            Assert.Equal(OrderStatus.Payed, order.Status);
+        }
+
+        // Only payed order can be completed
+        [Fact]
+        public void ShouldNotCompleteOrderWhenOrderInNonPayedStatus()
+        {
+            var order = new Order("Empty");
+            var order2 = new Order("PaymentExpected");
+            var order3 = new Order("Cancelled");
+            var order4 = new Order("Payed");
+            order2.AddItem(new OrderItem());
+            order4.AddItem(new OrderItem());
+            order4.Pay(1000);
+            var receipt = order4.GetPaymentReceipt();
+            order3.Cancel();
+            order.Receive(receipt);
+            order2.Receive(receipt);
+            order3.Receive(receipt);
+            Assert.Equal(OrderStatus.Empty, order.Status);
+            Assert.Equal(OrderStatus.PaymentExpected, order2.Status);
+            Assert.Equal(OrderStatus.Cancelled, order3.Status);
         }
     }
 }

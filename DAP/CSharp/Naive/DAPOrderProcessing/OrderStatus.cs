@@ -3,8 +3,9 @@
     public enum OrderStatus
     {
         Empty,
-        PaymentExpecting,
+        PaymentExpected,
         Payed,
-        Cancelled
+        Cancelled,
+        Completed
     }
 }
