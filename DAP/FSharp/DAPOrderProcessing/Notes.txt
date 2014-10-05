@@ -1,0 +1,10 @@
+﻿Comments about naive C# code.
+
+	Some requirement can be easily omitted.
+	How to make a code that is not brittle and can give us a compile time feedback ?
+	What if requirements change for some methods but not for all (we have if statement in every method) ?
+
+	Subtle difference
+
+		If I'm in the middle of paying my order and an order item changes (like another process adding and removing items) ? Everything should be immutable
+
