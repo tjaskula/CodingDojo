@@ -56,7 +56,7 @@
 
         internal override string Score()
         {
-            return this.ToWord(_scorePlayer1) + this.ToWord(_scorePlayer2);
+            return ToWord(_scorePlayer1) + ToWord(_scorePlayer2);
         }
 
         private string ToWord(int score)
@@ -387,7 +387,7 @@
 
         internal override string Score()
         {
-            return this.ToWord(_scorePlayer1) + "All";
+            return ToWord(_scorePlayer1) + "All";
         }
 
         private string ToWord(int score)
