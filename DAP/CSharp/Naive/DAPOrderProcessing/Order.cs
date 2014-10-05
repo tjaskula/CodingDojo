@@ -23,6 +23,11 @@ namespace DAPOrderProcessing
             get { return _orderStatus; }
         }
 
+        public decimal PayedAmount
+        {
+            get { return _payedAmount; }
+        }
+
         public void AddItem(OrderItem orderItem)
         {
             if (_orderStatus == OrderStatus.Empty || _orderStatus == OrderStatus.PaymentExpecting)

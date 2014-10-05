@@ -54,5 +54,18 @@ namespace DAPOrderProcessing.Tests
             order.Pay(1000);
             Assert.Equal(OrderStatus.Empty, order.Status);
         }
+
+        // You can only pay for an order which was not already payed
+        [Fact]
+        public void ShouldPaymentSucceedWhenOrderIsNotAlreadyPayed()
+        {
+            var order = new Order();
+            order.AddItem(new OrderItem());
+            order.Pay(1000);
+            order.AddItem(new OrderItem());
+            order.Pay(5000);
+            Assert.Equal(1, order.Items.Count());
+            Assert.Equal(1000, order.PayedAmount);
+        }
     }
 }
