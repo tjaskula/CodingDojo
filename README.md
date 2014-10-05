@@ -6,7 +6,7 @@ This repository contains some coding dojos and exercices I've been runing in dif
 1. Tennis Kata
 ---------------
 
-   *C# version*
+   **C# version**
 
    This is the tennis kata implementation coming in two ways
 
