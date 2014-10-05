@@ -192,5 +192,31 @@ namespace DAPOrderProcessing.Tests
             Assert.Equal(OrderStatus.PaymentExpected, order2.Status);
             Assert.Equal(OrderStatus.Cancelled, order3.Status);
         }
+
+        // No operation is allowed on completed order
+        [Fact]
+        public void ShouldNotOrderChangeStateWhenIsCompleted()
+        {
+            var order = new Order("Completed");
+            var orderItem1 = new OrderItem();
+            order.AddItem(orderItem1);
+            order.Pay(1000);
+            var receipt = order.GetPaymentReceipt();
+            order.Receive(receipt);
+            Assert.Equal(OrderStatus.Completed, order.Status);
+
+            order.AddItem(new OrderItem());
+            Assert.Equal(OrderStatus.Completed, order.Status);
+
+            order.RemoveItem(orderItem1);
+            Assert.Equal(OrderStatus.Completed, order.Status);
+
+            order.Cancel();
+            Assert.Equal(OrderStatus.Completed, order.Status);
+
+            order.Pay(2000);
+            Assert.Equal(OrderStatus.Completed, order.Status);
+
+        }
     }
 }
