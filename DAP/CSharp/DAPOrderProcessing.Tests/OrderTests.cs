@@ -76,5 +76,31 @@ namespace DAPOrderProcessing.Tests
             order.RemoveItem(new OrderItem());
             Assert.Equal(0, order.Items.Count());
         }
+
+        // You cannot remove items from payed or cancelled order
+        [Fact]
+        public void ShouldNotRemoveItemsWhenOrderIsPayed()
+        {
+            var order = new Order();
+            var orderItem = new OrderItem();
+            order.AddItem(orderItem);
+            order.Pay(1000);
+            order.RemoveItem(orderItem);
+            Assert.Equal(1, order.Items.Count());
+            Assert.Equal(OrderStatus.Payed, order.Status);
+        }
+
+        // You cannot remove items from payed or cancelled order
+        [Fact]
+        public void ShouldNotRemoveItemsWhenOrderIsCancelled()
+        {
+            var order = new Order();
+            var orderItem = new OrderItem();
+            order.AddItem(orderItem);
+            order.Cancel();
+            order.RemoveItem(orderItem);
+            Assert.Equal(1, order.Items.Count());
+            Assert.Equal(OrderStatus.Cancelled, order.Status);
+        }
     }
 }
