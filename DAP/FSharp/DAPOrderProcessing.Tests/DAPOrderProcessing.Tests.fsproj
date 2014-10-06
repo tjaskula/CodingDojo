@@ -49,7 +49,7 @@
   </Choose>
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
-    <Compile Include="DAPOrderProcessingTests.fs" />
+    <Compile Include="DAPOrderProcessing.fs" />
     <Content Include="packages.config" />
     <Content Include="app.config" />
   </ItemGroup>
@@ -77,6 +77,11 @@
       <HintPath>..\FSharp\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <ProjectReference Include="..\DAPOrderProcessing\DAPOrderProcessing.fsproj">
+      <Name>DAPOrderProcessing</Name>
+      <Project>{a0273710-4d98-4e26-81a1-195b8350d4d4}</Project>
+      <Private>True</Private>
+    </ProjectReference>
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

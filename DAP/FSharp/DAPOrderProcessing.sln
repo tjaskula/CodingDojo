@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "DAPOrderProcessing", "DAPOrderProcessing\DAPOrderProcessing.fsproj", "{A0273710-4D98-4E26-81A1-195B8350D4D4}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "DAPOrderProcessing.Tests", "..\DAPOrderProcessing.Tests\DAPOrderProcessing.Tests.fsproj", "{18C9FC17-1B5A-4FBA-97E7-80CCE28CD341}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "DAPOrderProcessing.Tests", "DAPOrderProcessing.Tests\DAPOrderProcessing.Tests.fsproj", "{18C9FC17-1B5A-4FBA-97E7-80CCE28CD341}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
