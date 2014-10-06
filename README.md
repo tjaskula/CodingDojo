@@ -37,9 +37,8 @@ Implementation inspired by Scott Wlaschin [blog](http://fsharpforfunandprofit.co
 
    This is just a bad design of C# code but the idea is to contrast it with an F# implementation. code but the idea is to contrast it with an F# implementation.
 
-
    **F# version**
-
+   
    If you read carefully the business rules above, it's obvious that we can implement this as a state machine with 5 states and states transitions :
 
    * Empty State
@@ -65,4 +64,4 @@ Implementation inspired by Scott Wlaschin [blog](http://fsharpforfunandprofit.co
    * You can Pay an order only in PaymentExpected state
    * You can Cancel an order only in Empty or PaymentExpected state
    * You can Recieve an order only in Payed stateaymentExpected state
-   	  * You can Recieve an order only in Payed state
+   * You can Recieve an order only in Payed statete
