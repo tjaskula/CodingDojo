@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="DAPOrderProcessing.fs" />
     <None Include="Script.fsx" />
+    <None Include="StepScript.fsx" />
     <Content Include="Notes.txt" />
   </ItemGroup>
   <ItemGroup>
