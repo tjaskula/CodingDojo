@@ -84,6 +84,15 @@ let addOrderItemToOrder order orderItem =
         | Completed _ -> printfn "ERROR: The order is completed"
                          order
 
+let removeOrderItemFromOrder order orderItem =
+    match order with
+        | Empty _ -> printfn "ERROR: The order is empty"
+                     order
+        | PaymentExpected state -> state.Remove orderItem
+        | _ -> printfn "ERROR: Not applicable"
+               order
+
 type Order with
     static member NewOrder = fun orderRef -> Order.Empty (NoItems orderRef)
     member x.Add = addOrderItemToOrder x
+    member x.Remove = removeOrderItemFromOrder x
