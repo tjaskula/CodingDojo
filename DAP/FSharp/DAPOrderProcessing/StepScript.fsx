@@ -28,3 +28,10 @@ let addToEmptyState orderItem =
 let addToPaymentExpectedState state orderItemToAdd =
     let newList = orderItemToAdd :: state.UnpaidItems
     Order.PaymentExpected {state with UnpaidItems = newList}
+
+let removeFromActiveState state orderItemToRemove =
+    let newList = state.UnpaidItems |> List.filter (fun i -> i <> orderItemToRemove)
+
+    match newList with
+        | [] -> Order.Empty NoItems
+        | _ -> Order.PaymentExpected {state with UnpaidItems = newList}
