@@ -64,6 +64,7 @@ Business rules according to states are as follows :
 * You can Remove order items only from PaymentExpected state
 * You can Pay an order only in PaymentExpected state
 * You can Cancel an order only in Empty or PaymentExpected state
-* You can Recieve an order only in Payed stateaymentExpected state
+* You can Recieve an order only in Payed state
+mentExpected state
 * You can Recieve an order only in Payed state an order only in Payed stateaymentExpected state
 * You can Recieve an order only in Payed stateateteete
