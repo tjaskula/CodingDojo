@@ -2,12 +2,12 @@
 {
     using Xunit;
 
-    public class GameWithStateTests
+    public class GameTests
     {
         [Fact]
         public void ShouldScorePlayerOne()
         {
-            var game = new GameWithState();
+            var game = new Game();
             game.PointTo(Player.One);
             Assert.Equal("FifteenLove", game.Score);
         }
@@ -15,7 +15,7 @@
         [Fact]
         public void ShouldScorePlayerTwo()
         {
-            var game = new GameWithState();
+            var game = new Game();
             game.PointTo(Player.Two);
             Assert.Equal("LoveFifteen", game.Score);
         }
@@ -23,7 +23,7 @@
         [Fact]
         public void ShouldScorePlayerTwoTwice()
         {
-            var game = new GameWithState();
+            var game = new Game();
             game.PointTo(Player.Two);
             game.PointTo(Player.Two);
             Assert.Equal("LoveThirty", game.Score);
@@ -32,7 +32,7 @@
         [Fact]
         public void ShouldScorePlayerOne3Times()
         {
-            var game = new GameWithState();
+            var game = new Game();
             game.PointTo(Player.One);
             game.PointTo(Player.One);
             game.PointTo(Player.One);
@@ -42,7 +42,7 @@
         [Fact]
         public void ShouldScoreAdvantagePlayerOne()
         {
-            var game = new GameWithState();
+            var game = new Game();
             game.PointTo(Player.One);
             game.PointTo(Player.Two);
             game.PointTo(Player.Two);
@@ -56,7 +56,7 @@
         [Fact]
         public void ShouldScoreDeuceAfterAdvantage()
         {
-            var game = new GameWithState();
+            var game = new Game();
             game.PointTo(Player.One);
             game.PointTo(Player.Two);
             game.PointTo(Player.Two);
@@ -71,7 +71,7 @@
         [Fact]
         public void ShouldWinPlayer1()
         {
-            var game = new GameWithState();
+            var game = new Game();
             game.PointTo(Player.One);
             game.PointTo(Player.Two);
             game.PointTo(Player.Two);

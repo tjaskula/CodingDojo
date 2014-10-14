@@ -1,10 +1,10 @@
 ﻿namespace TennisKata
 {
-    public class GameWithState
+    public class Game
     {
         private GameState _state;
 
-        public GameWithState()
+        public Game()
         {
             _state = new InitialEqState(0, 0);
         }
