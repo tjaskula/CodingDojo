@@ -2,25 +2,36 @@
 {
     public class Game
     {
-        private GameState _state;
+
+        public readonly IScore Player1Score;
+        public readonly IScore Player2Score;
 
         public Game()
         {
-            _state = new InitialEqState(0, 0);
+            this.Player1Score = new ZeroPoint();
+            this.Player2Score = new ZeroPoint();
         }
 
-        public void PointTo(Player player)
+        private Game(IScore newPlayer1Score, IScore newPlayer2Score)
         {
-            _state.PointTo(player);
-            _state = _state.GetNextState();
+            this.Player1Score = newPlayer1Score;
+            this.Player2Score = newPlayer2Score;
         }
 
-        public string Score
+        public Game Player1WinsPoint()
         {
-            get
-            {
-                return _state.Score();
-            }
+            var newPlayer1Score = this.Player2Score.Accept(this.Player1Score);
+            var newPlayer2Score = this.Player2Score.LoseBall();
+
+            return new Game(newPlayer1Score, newPlayer2Score);
+        }
+
+        public Game Player2WinsPoint()
+        {
+            var newPlayer2Score = this.Player1Score.Accept(this.Player2Score);
+            var newPlayer1Score = this.Player1Score.LoseBall();
+
+            return new Game(newPlayer1Score, newPlayer2Score);
         }
     }
 }

@@ -5,84 +5,22 @@
     public class GameTests
     {
         [Fact]
-        public void ShouldScorePlayerOne()
+        public void ShouldWinPlayer1CC1()
         {
-            var game = new Game();
-            game.PointTo(Player.One);
-            Assert.Equal("FifteenLove", game.Score);
-        }
+            var game = new Game()
+                            .Player1WinsPoint()
+                            .Player1WinsPoint()
+                            .Player1WinsPoint()
+                            .Player2WinsPoint()
+                            .Player2WinsPoint()
+                            .Player2WinsPoint()
+                            .Player2WinsPoint()
+                            .Player1WinsPoint()
+                            .Player1WinsPoint()
+                            .Player1WinsPoint();
 
-        [Fact]
-        public void ShouldScorePlayerTwo()
-        {
-            var game = new Game();
-            game.PointTo(Player.Two);
-            Assert.Equal("LoveFifteen", game.Score);
-        }
-
-        [Fact]
-        public void ShouldScorePlayerTwoTwice()
-        {
-            var game = new Game();
-            game.PointTo(Player.Two);
-            game.PointTo(Player.Two);
-            Assert.Equal("LoveThirty", game.Score);
-        }
-
-        [Fact]
-        public void ShouldScorePlayerOne3Times()
-        {
-            var game = new Game();
-            game.PointTo(Player.One);
-            game.PointTo(Player.One);
-            game.PointTo(Player.One);
-            Assert.Equal("FortyLove", game.Score);
-        }
-
-        [Fact]
-        public void ShouldScoreAdvantagePlayerOne()
-        {
-            var game = new Game();
-            game.PointTo(Player.One);
-            game.PointTo(Player.Two);
-            game.PointTo(Player.Two);
-            game.PointTo(Player.Two);
-            game.PointTo(Player.One);
-            game.PointTo(Player.One);
-            game.PointTo(Player.One);
-            Assert.Equal("AdvantagePlayerOne", game.Score);
-        }
-
-        [Fact]
-        public void ShouldScoreDeuceAfterAdvantage()
-        {
-            var game = new Game();
-            game.PointTo(Player.One);
-            game.PointTo(Player.Two);
-            game.PointTo(Player.Two);
-            game.PointTo(Player.Two);
-            game.PointTo(Player.One);
-            game.PointTo(Player.One);
-            game.PointTo(Player.One);
-            game.PointTo(Player.Two);
-            Assert.Equal("Deuce", game.Score);
-        }
-
-        [Fact]
-        public void ShouldWinPlayer1()
-        {
-            var game = new Game();
-            game.PointTo(Player.One);
-            game.PointTo(Player.Two);
-            game.PointTo(Player.Two);
-            game.PointTo(Player.Two);
-            game.PointTo(Player.One);
-            game.PointTo(Player.One);
-            game.PointTo(Player.One);
-            game.PointTo(Player.Two);
-            game.PointTo(Player.One);
-            game.PointTo(Player.One);
-            Assert.Equal("GamePlayerOne", game.Score);
+            Assert.Equal(new GamePoint().ToString(), game.Player1Score.ToString());
+            Assert.Equal(new FortyPoints().ToString(), game.Player2Score.ToString());
         }
     }
 }
