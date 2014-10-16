@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace TennisKata
+﻿namespace TennisKata
 {
-    public class ZeroPoint : IScore
+    public class FortyPoints : IScore
     {
         public IScore Accept(IScore oponnentScore)
         {
@@ -11,17 +9,17 @@ namespace TennisKata
 
         public IScore WinBall(IScore opponentScore)
         {
-            return new FifteenPoints();
+            return new GamePoint();
         }
 
         public IScore WinBall(AdvantagePoint opponentScore)
         {
-            throw new Exception("Impossible case");
+            return this;
         }
 
         public IScore WinBall(FortyPoints opponentScore)
         {
-            return new FifteenPoints();
+            return new AdvantagePoint();
         }
 
         public IScore LoseBall()
@@ -31,7 +29,7 @@ namespace TennisKata
 
         public override string ToString()
         {
-            return "ZeroPoint";
+            return "FortyPoints";
         }
     }
 }
