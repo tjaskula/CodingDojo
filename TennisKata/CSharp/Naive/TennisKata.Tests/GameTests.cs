@@ -84,5 +84,28 @@
             game.PointTo(Player.One);
             Assert.Equal("GamePlayerOne", game.Score);
         }
+
+        [Fact]
+        public void ShouldWinPlayer1bis()
+        {
+            var game = new Game();
+            game.PointTo(Player.One);
+            game.PointTo(Player.Two);
+            game.PointTo(Player.Two);
+            game.PointTo(Player.Two);
+            game.PointTo(Player.One);
+            game.PointTo(Player.One);
+            game.PointTo(Player.One);
+            game.PointTo(Player.Two);
+            game.PointTo(Player.One);
+            game.PointTo(Player.Two);
+            game.PointTo(Player.One);
+            game.PointTo(Player.Two);
+            game.PointTo(Player.One);
+            game.PointTo(Player.Two);
+            game.PointTo(Player.One);
+            game.PointTo(Player.One);
+            Assert.Equal("GamePlayerOne", game.Score);
+        }
     }
 }
