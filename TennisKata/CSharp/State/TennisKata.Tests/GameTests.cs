@@ -5,6 +5,13 @@
     public class GameTests
     {
         [Fact]
+        public void ShouldDisplayInitialGameState()
+        {
+            var game = new Game();
+            Assert.Equal("LoveAll", game.Score);
+        }
+
+        [Fact]
         public void ShouldScorePlayerOne()
         {
             var game = new Game();
