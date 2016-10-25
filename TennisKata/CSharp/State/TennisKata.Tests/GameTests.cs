@@ -20,6 +20,15 @@
         }
 
         [Fact]
+        public void ShouldBeEqualState()
+        {
+            var game = new Game();
+            game.PointTo(Player.One);
+            game.PointTo(Player.Two);
+            Assert.Equal("FifteenAll", game.Score);
+        }
+
+        [Fact]
         public void ShouldScorePlayerTwo()
         {
             var game = new Game();
