@@ -185,3 +185,4 @@ FakesAssemblies/
 
 # InteliiJ
 .idea/
+out/
